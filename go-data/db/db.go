@@ -25,5 +25,10 @@ func Init() {
     if err != nil {
         log.Fatalf("Failed to connect to database: %v", err)
     }
+    
+    var err_ping = DB.Ping()
+    if err_ping != nil {
+        log.Fatalf("Failed to ping database: %v", err)
+    }
 }
 

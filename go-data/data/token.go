@@ -33,10 +33,12 @@ func SendVerificationEmail(email, token string) error {
 	to := email
 	smtpHost := "smtp.gmail.com"
 	smtpPort := "587"
-
+	
+	
+	domain := os.Getenv("domain")
 	msg := "Subject: Email Verification\n\n" +
 		"Please verify your email by clicking the following link:\n" +
-		fmt.Sprintf("http://localhost:8080/verify/%s", token)
+		fmt.Sprintf("http://%s/verify/%s", domain, token)
 
 	auth := smtp.PlainAuth("", from, password, smtpHost)
 	err_smpt := smtp.SendMail(smtpHost+":"+smtpPort, auth, from, []string{to}, []byte(msg))
